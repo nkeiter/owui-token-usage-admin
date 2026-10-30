@@ -1,0 +1,21 @@
+# Example only: all names, identifiers, and values below are placeholders.
+# Replace these with values that match your Open WebUI deployment and plugin.
+# Keep actual passwords and database DSNs in a secrets manager, never in Git.
+
+# Use a direct database DSN:
+# USAGE_DB_DSN=postgresql://USER:PASSWORD@HOST:5432/OPEN_WEBUI_DATABASE
+
+# Or retrieve the DSN from AWS Secrets Manager (choose one environment):
+APP_ENV=dev
+AWS_SECRET_ID_DEV=example-dev-openwebui-database-secret
+# APP_ENV=prod
+# AWS_SECRET_ID_PROD=example-prod-openwebui-database-secret
+AWS_SECRET_DSN_KEY=DATABASE_URL
+
+# These must match the tracking filter's configuration:
+USAGE_TIMEZONE=UTC
+USAGE_TIER_PREFIX=token-limit-
+USAGE_BUILTIN_TIERS=token-limit-enterprise,token-limit-pro,token-limit-standard,token-limit-test
+USAGE_DEFAULT_TIER=token-limit-standard
+USAGE_DEFAULT_DAILY_TOKENS=500000
+USAGE_DEFAULT_MONTHLY_TOKENS=5000000

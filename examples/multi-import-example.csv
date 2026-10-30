@@ -1,0 +1,5 @@
+group-name,email,daily-token-limit,monthly-token-limit,description
+summer-2027,alex.rivera@example.edu,200000,2000000,"Summer program - 200K/day, 2M/month"
+summer-2027,jamie.chen@example.edu,,,
+research-demo,taylor.morgan@example.edu,500000,5000000,"Research cohort - 500K/day, 5M/month"
+research-demo,casey.jordan@example.edu,,,
