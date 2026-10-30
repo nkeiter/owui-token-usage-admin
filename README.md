@@ -2,13 +2,14 @@
 
 Developed by Nathan I Keiter, Gettysburg College.
 
-`owui_token_usage_admin.py` is an admin CLI for the Open WebUI usage tracking
-filter (`linc-usage-tracking`). It manages usage tiers (native `token-limit-*`
+`owui_token_usage_admin.py` is an admin CLI for the [Open WebUI](https://github.com/open-webui/open-webui)
+usage tracking filter ([owui-token-usage-tracking-plugin](https://github.com/nkeiter/owui-token-usage-tracking-plugin)).
+It manages usage tiers (native `token-limit-*`
 Open WebUI groups), tier limits, per-user overrides, and usage reports directly
 in PostgreSQL.
 
-The web console in [`owui-token-usage-management-console/`](owui-token-usage-management-console/README.md) is the
-preferred interface. This CLI is the fallback when the console is unavailable, and it behaves the same way
+The web console ([owui-token-usage-management-console](https://github.com/nkeiter/owui-token-usage-management-console)) is the
+graphical (GUI) version of this CLI and the preferred interface. This CLI is the fallback when the console is unavailable, and it behaves the same way
 (a user has one default tier plus any number of custom tiers, whose limits add up; limits are validated; every change prints an `AUDIT {...}` JSON line to stderr).
 
 ## Requirements
@@ -21,7 +22,7 @@ preferred interface. This CLI is the fallback when the console is unavailable, a
   It can also run from another machine if that machine has the required network
   access to the Open WebUI PostgreSQL database and, when applicable, AWS Secrets
   Manager.
-- The `owui-token-usage-tracking-plugin` must be installed, enabled, and
+- The [owui-token-usage-tracking-plugin](https://github.com/nkeiter/owui-token-usage-tracking-plugin) must be installed, enabled, and
   properly configured on the Open WebUI instance to use this database. Run at
   least one chat through the enabled filter so it initializes the usage schema
   and built-in tier groups before using this CLI.
@@ -134,10 +135,6 @@ Example files using fake data are available in [`examples/`](examples/):
   shell or deployment environment before running the script. The script does
   not automatically load this text file.
 
-Gettysburg College-specific environment settings are documented separately in
-[`docs/env-example.txt`](docs/env-example.txt); it contains secret identifiers
-only, not database passwords or DSN values.
-
 ```bash
 ./owui_token_usage_admin.py create-tier --group spring-2026 --daily-tokens 200000 --monthly-tokens 2000000
 ./owui_token_usage_admin.py add-users --group token-limit-spring-2026 --csv students.csv --dry-run
@@ -170,6 +167,22 @@ only, not database passwords or DSN values.
 - `set-user-limit` writes `user_limit_overrides` only; it never changes group membership. Unlike the console, it
   keeps whichever limit you do not pass.
 - Errors print `ERROR: ...` and exit with status 1.
+
+## Related projects
+
+- [owui-token-usage-tracking-plugin](https://github.com/nkeiter/owui-token-usage-tracking-plugin):
+  the required Open WebUI filter plugin that creates and enforces the usage
+  tables and tiers this CLI manages.
+- [owui-token-usage-management-console](https://github.com/nkeiter/owui-token-usage-management-console):
+  the graphical (web) version of this CLI, deployed as an AWS Lambda app.
+- [Open WebUI](https://github.com/open-webui/open-webui): the application
+  these projects extend. Thank you to its authors and contributors.
+
+### Other related work by this author
+
+- [owui-scim-admin](https://github.com/nkeiter/owui-scim-admin): stand-alone
+  command-line utility for administering Open WebUI users and groups through
+  its SCIM 2.0 API.
 
 ## Disclaimer
 
